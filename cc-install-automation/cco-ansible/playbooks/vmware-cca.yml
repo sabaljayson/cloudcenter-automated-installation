@@ -1,0 +1,44 @@
+---
+- name: ansible-vmware-install-cca
+  # Use host or group defined in /etc/ansible/hosts
+  hosts: cc-amqp-01
+  gather_facts: no
+
+  # This handler is rebooting the target host and waiting for it to come back online
+  # Once the shutdown is initiated, the status cannot be verified which leads to the task state unavailable
+  handlers:
+    - name: Restart server
+      command: shutdown -r now "Reboot triggered by Ansible"
+      async: 0
+      poll: 0
+      ignore_errors: true
+    - name: Wait for server to restart
+      local_action:
+        module: wait_for
+          host=cc-amqp-01
+          port=22
+          delay=1
+          timeout=60
+  tasks:
+  - name: Install Wget
+    raw: yum -y install wget
+  - name: Step 0a - download cc-host-install-start.sh
+    raw: wget http://straube.ch/cisco/00_cc-host-install-start.sh -P $HOME
+  - name: Step 0b - exec 00_cc-host-install-start.sh
+    command: sh $HOME/00_cc-host-install-start.sh
+  - name: Step 1 - Update hosts file with hosts file from ansible server
+    copy: src=/etc/hosts dest=/etc/hosts
+  - name: Step 3 - chmod +x installer for VMware CloudCenter Manager
+    raw: chmod +x /tmp/cc-binary/core_installer.bin
+  - name: Step 4 - Execute installer for VMware RabbitMQ
+    command: sh /tmp/cc-binary/core_installer.bin centos7 vmware rabbit
+  - name: Step 6 - Clear the IP tables rules to enable access to non-standard ports (5671)
+    command: iptables -F
+  - name: Step 7 - Execute Java installer
+    command: java -jar /tmp/cc-binary/cco-installer.jar /tmp/cc-binary/conn_broker-response.xml
+  - name: Step 8a - execute mail.properties.py
+    raw: python /tmp/cc-install-automation/cc-property-scripts/02_cca-gateway_config.properties.py 'cc-manager'
+  - name: Step 8b - Copy gua.properties to target VM
+    raw: python /tmp/cc-install-automation/cc-property-scripts/02_cca-gua.properties.py 'cc-orchestrator-01'
+  - name: restart in 60 sec
+    raw: shutdown -r 1

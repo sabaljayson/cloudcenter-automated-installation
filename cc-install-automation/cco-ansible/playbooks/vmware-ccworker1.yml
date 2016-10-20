@@ -1,0 +1,36 @@
+---
+- name: ansible-vmware-install-cco
+  # Use host or group defined in /etc/ansible/hosts
+  hosts: cc-worker1-01
+
+  # This handler is rebooting the target host and waiting for it to come back online
+  # Once the shutdown is initiated, the status cannot be verified which leads to the task state unavailable
+  handlers:
+    - name: Restart server
+      command: shutdown -r now "Reboot triggered by Ansible"
+      async: 0
+      poll: 0
+      ignore_errors: true
+    - name: Wait for server to restart
+      local_action:
+        module: wait_for
+          host=cc-worker1-01
+          port=22
+          delay=1
+          timeout=60
+ 
+  tasks:
+  - name: Install Wget
+    raw: yum -y install wget
+  - name: Step 0a - download 00_cc-host-install-start.sh
+    raw: wget http://straube.ch/cisco/00_cc-host-install-start.sh -P $HOME
+  - name: Step 0b - exec 00_cc-host-install-start.sh
+    command: sh $HOME/00_cc-host-install-start.sh
+  - name: Step 1 - Update hosts file with hosts file from ansible server
+    copy: src=/etc/hosts dest=/etc/hosts
+  - name: Step 3 - chmod +x installer for cc worker1
+    raw: chmod +x /tmp/cc-binary/worker_installer.bin
+  - name: Step 4 - Execute installer for cc worker1
+    command: sh /tmp/cc-binary/worker_installer.bin centos7 vmware worker1
+  - name: power off the VM >> you need to create a snapshot manuelly with name worker1
+    raw: poweroff
