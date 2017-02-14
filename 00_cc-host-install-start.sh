@@ -1,16 +1,19 @@
 #!/bin/bash
-#start here >> wget -P /tmp http://straube.ch/cisco/cc-host-install-start.sh
 
-
-if [ $# -ne 2 ]; then
+if [ $# -ne 3 ]; then
  echo 'please provide login credentials of the cloudcenter artifact server'
  echo '1.[user name]'
- echo '2.[password]'
+ echo '2.[user password]'
+ echo '3.[cc binary path]'
  exit 1
 fi
 
 USERNAME=$1
 USERPASSWORD=$2
+CC_BINARY_PATH=$3
+GIT_REPO_PROJECT=cloudcenter-automated-installation
+GIT_REPO_URL=HybridCloudSuccessful/$GIT_REPO_PROJECT.git
+INSTALL_EXECUTE_FILE=cc-install-automation/99_execute.sh
 
 #clean tmp
 sudo rm -rf /tmp/*
@@ -19,17 +22,17 @@ sudo rm -rf /tmp/*
 sudo yum -y install unzip
 sudo yum -y install zip
 sudo yum -y install tar
+sudo yum -y install git
 
-wget -P /tmp http://straube.ch/cisco/cc-host-install/cc-host-install.zip
-sudo unzip -o /tmp/cc-host-install.zip -d /tmp
+git clone https://github.com/$GIT_REPO_URL /tmp/$GIT_REPO_PROJECT
 
-source /tmp/cc-host-install/00_prepare-host-core.sh
-source /tmp/cc-host-install/01_prepare-host-download-cc-package.sh $USERNAME $USERPASSWORD
-source /tmp/cc-host-install/02_prepare-host-tools-python.sh
-source /tmp/cc-host-install/03_prepare-host-tools-pip.sh
-source /tmp/cc-host-install/04_prepare-host-tools-ansible.sh
-source /tmp/cc-host-install/05_prepare-host-install-terraform.sh
+source /tmp/$GIT_REPO_PROJECT/cc-host-install/00_prepare-host-core.sh
+source /tmp/$GIT_REPO_PROJECT/cc-host-install/01_prepare-host-download-cc-package.sh $USERNAME $USERPASSWORD $CC_BINARY_PATH
+source /tmp/$GIT_REPO_PROJECT/cc-host-install/02_prepare-host-tools-python.sh
+source /tmp/$GIT_REPO_PROJECT/cc-host-install/03_prepare-host-tools-pip.sh
+source /tmp/$GIT_REPO_PROJECT/cc-host-install/04_prepare-host-tools-ansible.sh
+source /tmp/$GIT_REPO_PROJECT/cc-host-install/05_prepare-host-install-terraform.sh
 
-wget -P /tmp http://straube.ch/cisco/01_execute-installation.sh
-chmod +x /tmp/01_execute-installation.sh
 cd /tmp
+chmod -R +x *.sh
+#source /tmp/$GIT_REPO_PROJECT/$INSTALL_EXECUTE
