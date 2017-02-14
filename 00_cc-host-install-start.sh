@@ -14,6 +14,7 @@ CC_BINARY_PATH=$3
 GIT_REPO_PROJECT=cloudcenter-automated-installation
 GIT_REPO_URL=HybridCloudSuccessful/$GIT_REPO_PROJECT.git
 INSTALL_EXECUTE_FILE=cc-install-automation/99_execute.sh
+INSTALL_ROOT_FOLDER=/tmp
 
 #clean tmp
 sudo rm -rf /tmp/*
@@ -26,13 +27,13 @@ sudo yum -y install git
 
 git clone https://github.com/$GIT_REPO_URL /tmp/$GIT_REPO_PROJECT
 
-source /tmp/$GIT_REPO_PROJECT/cc-host-install/00_prepare-host-core.sh
-source /tmp/$GIT_REPO_PROJECT/cc-host-install/01_prepare-host-download-cc-package.sh $USERNAME $USERPASSWORD $CC_BINARY_PATH
-source /tmp/$GIT_REPO_PROJECT/cc-host-install/02_prepare-host-tools-python.sh
-source /tmp/$GIT_REPO_PROJECT/cc-host-install/03_prepare-host-tools-pip.sh
-source /tmp/$GIT_REPO_PROJECT/cc-host-install/04_prepare-host-tools-ansible.sh
-source /tmp/$GIT_REPO_PROJECT/cc-host-install/05_prepare-host-install-terraform.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/00_prepare-host-core.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/01_prepare-host-download-cc-package.sh $USERNAME $USERPASSWORD $CC_BINARY_PATH
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/02_prepare-host-tools-python.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_prepare-host-tools-pip.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_prepare-host-tools-ansible.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/05_prepare-host-install-terraform.sh
 
-cd /tmp
+cd $INSTALL_ROOT_FOLDER
 chmod -R +x *.sh
 #source /tmp/$GIT_REPO_PROJECT/$INSTALL_EXECUTE
