@@ -32,7 +32,6 @@ source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/01_prepare-host-do
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/02_prepare-host-tools-python.sh
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_prepare-host-tools-pip.sh
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_prepare-host-tools-ansible.sh
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/05_prepare-host-install-terraform.sh
 
 cd $INSTALL_ROOT_FOLDER
 chmod -R +x *.sh
