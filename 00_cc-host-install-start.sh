@@ -34,5 +34,5 @@ source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_prepare-host-to
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_prepare-host-tools-ansible.sh
 
 cd $INSTALL_ROOT_FOLDER
-chmod -R +x *.sh
-#source /tmp/$GIT_REPO_PROJECT/$INSTALL_EXECUTE
+chmod -R +x /INSTALL_ROOT_FOLDER/*.sh
+source /tmp/$GIT_REPO_PROJECT/$INSTALL_EXECUTE
