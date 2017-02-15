@@ -13,7 +13,7 @@ USERPASSWORD=$2
 CC_BINARY_PATH=$3
 GIT_REPO_PROJECT=cloudcenter-automated-installation
 GIT_REPO_URL=HybridCloudSuccessful/$GIT_REPO_PROJECT.git
-INSTALL_EXECUTE_FILE=cc-install-automation/99_execute.sh
+INSTALL_EXECUTE_FOLDER=cc-install-automation
 INSTALL_ROOT_FOLDER=/tmp
 
 #clean tmp
@@ -33,6 +33,21 @@ source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/02_prepare-host-to
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_prepare-host-tools-pip.sh
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_prepare-host-tools-ansible.sh
 
-cd $INSTALL_ROOT_FOLDER
-chmod -R +x /INSTALL_ROOT_FOLDER/*.sh
-source /tmp/$GIT_REPO_PROJECT/$INSTALL_EXECUTE
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER
+chmod -R +x *sh
+pwd
+
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/ccm-terraform
+chmod -R +x *sh
+
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/cco-terraform
+chmod -R +x *sh
+
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/ccm-ansible
+chmod -R +x *sh
+
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/cco-ansible
+chmod -R +x *sh
+
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER
+
