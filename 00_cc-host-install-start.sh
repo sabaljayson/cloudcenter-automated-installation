@@ -39,9 +39,11 @@ pwd
 
 cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/ccm-terraform
 chmod -R +x *sh
+chmod -R +x terraform
 
 cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/cco-terraform
 chmod -R +x *sh
+chmod -R +x terraform
 
 cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/ccm-ansible
 chmod -R +x *sh
@@ -50,4 +52,4 @@ cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/cco-ansible
 chmod -R +x *sh
 
 cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER
-sh 99_execute.sh
+./99_execute.sh
