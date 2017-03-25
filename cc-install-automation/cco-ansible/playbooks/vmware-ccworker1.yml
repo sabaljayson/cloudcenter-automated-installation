@@ -20,16 +20,12 @@
           timeout=60
  
   tasks:
-  - name: Install Wget
-    raw: yum -y install wget
-  - name: Step 0a - download 00_cc-host-install-start.sh
-    raw: wget http://straube.ch/cisco/00_cc-host-install-start.sh -P $HOME
-  - name: Step 0b - exec 00_cc-host-install-start.sh
-    command: sh $HOME/00_cc-host-install-start.sh
-  - name: Step 1 - Update hosts file with hosts file from ansible server
+  - name: Step 1 git clone
+    raw: git clone https://github.com/HybridCloudAutomation/cloudcenter-automated-installation.git /tmp
+  - name: Step 2 - exec 00_start-install.sh
+    command: sh /tmp/cloudcenter-automated-installation/00_start-install.sh {{ user }} {{ password }} {{ cc-binary-path }}
+  - name: Step 3 - Update hosts file with hosts file from ansible server
     copy: src=/etc/hosts dest=/etc/hosts
-  - name: Step 3 - chmod +x installer for cc worker1
-    raw: chmod +x /tmp/cc-binary/worker_installer.bin
   - name: Step 4 - Execute installer for cc worker1
     command: sh /tmp/cc-binary/worker_installer.bin centos7 vmware worker1
   - name: power off the VM >> you need to create a snapshot manuelly with name worker1

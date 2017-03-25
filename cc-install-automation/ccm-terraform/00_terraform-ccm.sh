@@ -4,6 +4,7 @@ function pause(){
    read -p "$*"
 }
 
+
 ############### TERRAFORM CCM STAGING ###################
 ./terraform get module-vsphere
 ./terraform get

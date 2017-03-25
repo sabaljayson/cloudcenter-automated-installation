@@ -20,25 +20,21 @@
           delay=1
           timeout=60
   tasks:
-  - name: Install Wget
-    raw: yum -y install wget
-  - name: Step 0a - download cc-host-install-start.sh
-    raw: wget http://straube.ch/cisco/00_cc-host-install-start.sh -P $HOME
-  - name: Step 0b - exec 00_cc-host-install-start.sh
-    command: sh $HOME/00_cc-host-install-start.sh
-  - name: Step 1 - Update hosts file with hosts file from ansible server
+  - name: Step 1 git clone
+    raw: git clone https://github.com/HybridCloudAutomation/cloudcenter-automated-installation.git /tmp
+  - name: Step 2 - exec 00_start-install.sh
+    command: sh /tmp/cloudcenter-automated-installation/00_start-install.sh {{ user }} {{ password }} {{ cc-binary-path }}
+  - name: Step 3 - Update hosts file with hosts file from ansible server
     copy: src=/etc/hosts dest=/etc/hosts
-  - name: Step 3 - chmod +x installer for VMware CloudCenter Manager
-    raw: chmod +x /tmp/cc-binary/core_installer.bin
   - name: Step 4 - Execute installer for VMware RabbitMQ
     command: sh /tmp/cc-binary/core_installer.bin centos7 vmware rabbit
-  - name: Step 6 - Clear the IP tables rules to enable access to non-standard ports (5671)
+  - name: Step 5 - Clear the IP tables rules to enable access to non-standard ports (5671)
     command: iptables -F
-  - name: Step 7 - Execute Java installer
+  - name: Step 6 - Execute Java installer
     command: java -jar /tmp/cc-binary/cco-installer.jar /tmp/cc-binary/conn_broker-response.xml
-  - name: Step 8a - execute mail.properties.py
-    raw: python /tmp/cc-install-automation/cc-property-scripts/02_cca-gateway_config.properties.py 'cc-manager'
-  - name: Step 8b - Copy gua.properties to target VM
-    raw: python /tmp/cc-install-automation/cc-property-scripts/02_cca-gua.properties.py 'cc-orchestrator-01'
+  - name: Step 7 - execute 02_cca-gateway_config.properties.py 'cc-manager'
+    raw: python /tmp/cloudcenter-automated-installation/cc-install-automation/cc-property-scripts/02_cca-gateway_config.properties.py 'cc-manager'
+  - name: Step 8 - 02_cca-gua.properties.py 'cc-orchestrator-01'
+    raw: python /tmp/cloudcenter-automated-installation/cc-install-automation/cc-property-scripts/02_cca-gua.properties.py 'cc-orchestrator-01'
   - name: restart in 60 sec
     raw: shutdown -r 1
