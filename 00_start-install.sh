@@ -20,19 +20,19 @@ export INSTALL_ROOT_FOLDER=/tmp
 sudo rm -rf $INSTALL_ROOT_FOLDER/*
 
 #tools
-sudo yum -y install unzip
-sudo yum -y install zip
-sudo yum -y install tar
+sudo yum -y update
 sudo yum -y install git
+sudo yum -y install sshpass
+sudo yum -y install xz-libs
 
 #clone repository
 git clone https://github.com/$GIT_REPO_URL /tmp/$GIT_REPO_PROJECT
 
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/00_prepare-host-core.sh
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/01_prepare-host-download-cc-package.sh $USERNAME $USERPASSWORD $CC_BINARY_PATH
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/02_prepare-host-tools-python.sh
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_prepare-host-tools-pip.sh
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_prepare-host-tools-ansible.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/00_download-cc-binary.sh $USERNAME $USERPASSWORD $CC_BINARY_PATH
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/01_install-epel.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/02_install-python.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_install-pip.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_install-ansible.sh
 
 cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER
 chmod -R +x *sh
