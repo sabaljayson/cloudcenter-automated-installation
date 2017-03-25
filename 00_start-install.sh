@@ -17,7 +17,7 @@ INSTALL_EXECUTE_FOLDER=cc-install-automation
 INSTALL_ROOT_FOLDER=/tmp
 
 #clean tmp
-sudo rm -rf /tmp/*
+sudo rm -rf INSTALL_ROOT_FOLDER/*
 
 #tools
 sudo yum -y install unzip
@@ -25,6 +25,7 @@ sudo yum -y install zip
 sudo yum -y install tar
 sudo yum -y install git
 
+#clone repository
 git clone https://github.com/$GIT_REPO_URL /tmp/$GIT_REPO_PROJECT
 
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/00_prepare-host-core.sh
