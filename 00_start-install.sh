@@ -17,7 +17,7 @@ INSTALL_EXECUTE_FOLDER=cc-install-automation
 INSTALL_ROOT_FOLDER=/tmp
 
 #clean tmp
-sudo rm -rf INSTALL_ROOT_FOLDER/*
+sudo rm -rf $INSTALL_ROOT_FOLDER/*
 
 #tools
 sudo yum -y install unzip
