@@ -8,13 +8,13 @@ if [ $# -ne 3 ]; then
  exit 1
 fi
 
-USERNAME=$1
-USERPASSWORD=$2
-CC_BINARY_PATH=$3
-GIT_REPO_PROJECT=cloudcenter-automated-installation
-GIT_REPO_URL=HybridCloudSuccessful/$GIT_REPO_PROJECT.git
-INSTALL_EXECUTE_FOLDER=cc-install-automation
-INSTALL_ROOT_FOLDER=/tmp
+export USERNAME=$1
+export USERPASSWORD=$2
+export CC_BINARY_PATH=$3
+export GIT_REPO_PROJECT=cloudcenter-automated-installation
+export GIT_REPO_URL=HybridCloudSuccessful/$GIT_REPO_PROJECT.git
+export INSTALL_EXECUTE_FOLDER=cc-install-automation
+export INSTALL_ROOT_FOLDER=/tmp
 
 #clean tmp
 sudo rm -rf $INSTALL_ROOT_FOLDER/*
