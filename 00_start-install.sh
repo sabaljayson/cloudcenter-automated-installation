@@ -10,7 +10,7 @@ fi
 
 export USERNAME=$1
 export USERPASSWORD=$2
-export CC_BINARY_PATH=$3
+export CC_BINARY_URL=$3
 export INSTALL_ROOT_FOLDER=/tmp
 export INSTALL_AUTOMATION_FOLDER=cc-install-automation
 export GIT_REPO_PROJECT=cloudcenter-automated-installation
@@ -18,21 +18,23 @@ export GIT_REPO_URL=HybridCloudSuccessful/$GIT_REPO_PROJECT.git
 
 #tools
 sudo yum -y update
-sudo yum -y install git
 sudo yum -y install sshpass
 sudo yum -y install xz-libs
 
 #clean tmp
 sudo rm -rf $INSTALL_ROOT_FOLDER/*
 
-#clone repository
+#git install
+sudo yum -y install git
+
+#github project clone
 git clone https://github.com/$GIT_REPO_URL /tmp/$GIT_REPO_PROJECT
 
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/00_download-cc-binary.sh $USERNAME $USERPASSWORD $CC_BINARY_PATH
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/01_install-epel.sh
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/02_install-python.sh
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_install-pip.sh
-source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_install-ansible.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/01_download-cc-binary.sh $USERNAME $USERPASSWORD $CC_BINARY_URL
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/02_install-epel.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_install-python.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_install-pip.sh
+source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/05_install-ansible.sh
 
 cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER
 chmod -R +x *sh
@@ -52,5 +54,6 @@ chmod -R +x *sh
 cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER/cco-ansible
 chmod -R +x *sh
 
-cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER
-./99_execute.sh
+#execute installation
+sudo sh $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER/99_execute.sh
+#99_execute.sh
