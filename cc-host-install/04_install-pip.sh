@@ -9,7 +9,5 @@ function pause(){
 sudo yum -y install gcc libffi-devel python-devel openssl-devel
 sudo yum -y install python-pip
 sudo easy_install pip
+sudo pip install --upgrade pip
 sudo pip install cryptography
-
-
-
