@@ -19,9 +19,11 @@ mkdir $CC_BINARY_FOLDER
 ############### DOWNLOAD CC INSTALL FILES TO HOST ###################
 sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/cco-installer.jar
 sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/cco-response.xml
-sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/core_installer.bin
 sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/ccm-installer.jar
 sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/ccm-response.xml
-sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/conn_broker-response.xml
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/monitor-installer.jar
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/monitor-response.xml
 sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/worker_installer.bin
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/core_installer.bin
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/conn_broker-response.xml
 chmod +x $CC_BINARY_FOLDER/*.bin
