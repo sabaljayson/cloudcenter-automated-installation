@@ -14,9 +14,9 @@ fi
 
 USERNAME=$1
 USERPWASSWORD=$2
-CC_BINARY_PATH=$3
-#$USERNAME $USERPWASSWORD $CC_BINARY_PATH
+CC_BINARY_URL=$3
+#$USERNAME $USERPWASSWORD $CC_BINARY_URL
 
 ############### ANSIBLE ###################
-ansible-playbook playbooks/vmware-cca.yml --extra-vars "user=$USERNAME password=$USERPWASSWORD cc-binary-path=$CC_BINARY_PATH"
+ansible-playbook playbooks/vmware-cca.yml --extra-vars "user=$USERNAME password=$USERPWASSWORD cc-binary-url=$CC_BINARY_URL"
 
