@@ -9,12 +9,11 @@ if [ $# -ne 3 ]; then
  exit 1
 fi
 
-export CC_BINARY_RELEASE=cloudcenter-release-4.7.2-20170223.1-installer-artifacts
-export CC_BINARY_FOLDER=/tmp/cc-binary/$CC_BINARY_RELEASE
+export CC_BINARY_FOLDER=/tmp/cc-binary/cloudcenter-release-4.7.2-20170223.1-installer-artifacts
 
 USERNAME=$1
 USERPASSWORD=$2
-export CC_BINARY_URL=$3
+CC_BINARY_URL=$3
 
 mkdir $CC_BINARY_FOLDER
 ############### DOWNLOAD CC INSTALL FILES TO HOST ###################
