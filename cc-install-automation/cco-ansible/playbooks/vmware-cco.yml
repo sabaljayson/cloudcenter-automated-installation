@@ -24,7 +24,7 @@
   - name: Step 1 git clone
     raw: git clone https://github.com/HybridCloudAutomation/cloudcenter-automated-installation.git /tmp
   - name: Step 2 - exec 00_prepare-host.sh
-    command: sh /tmp/cloudcenter-automated-installation/00_prepare-host.sh {{ user }} {{ password }} {{ cc-binary-url }}
+    command: sh /tmp/cloudcenter-automated-installation/00_prepare-host.sh {{ user }} {{ password }} {{ cc_binary_url }}
   - name: Step 3 - Update hosts file with hosts file from ansible server
     copy: src=/etc/hosts dest=/etc/hosts
   - name: Step 4 - Execute installer for VMware CloudCenter Orchestrator

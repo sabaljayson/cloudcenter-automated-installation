@@ -18,5 +18,5 @@ CC_BINARY_URL=$3
 #$USERNAME $USERPWASSWORD $CC_BINARY_URL
 
 ############### ANSIBLE ###################
-ansible-playbook playbooks/vmware-cco.yml --extra-vars "user=$USERNAME password=$USERPWASSWORD cc-binary-url=$CC_BINARY_URL"
+ansible-playbook playbooks/vmware-cco.yml --extra-vars "user=$USERNAME password=$USERPWASSWORD cc_binary_url=$CC_BINARY_URL"
 
