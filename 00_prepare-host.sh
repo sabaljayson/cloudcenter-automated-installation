@@ -35,6 +35,8 @@ source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_install-python.
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_install-pip.sh
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/05_install-ansible.sh
 
+chmod -R +x *sh
+
 cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER
 chmod -R +x *sh
 pwd
