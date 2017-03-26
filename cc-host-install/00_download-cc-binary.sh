@@ -1,10 +1,6 @@
 #!/bin/bash
 # init
 
-function pause(){
-   read -p "$*"
-}
-
 if [ $# -ne 3 ]; then
  echo 'please provide login credentials of the cloudcenter artifact server'
  echo '1.[user name]'
@@ -13,18 +9,20 @@ if [ $# -ne 3 ]; then
  exit 1
 fi
 
-USERNAME=$1
-USERPWASSWORD=$2
-CC_BINARY_PATH=$3
-WORKING_FOLDER=/tmp/cc-binary
+export CC_BINARY_RELEASE=cloudcenter-release-4.7.2-20170223.1-installer-artifacts
+export CC_BINARY_FOLDER=/tmp/cc-binary/$CC_BINARY_RELEASE
 
-mkdir /tmp/cc-binary
+USERNAME=$1
+USERPASSWORD=$2
+export CC_BINARY_URL=$3
+
+mkdir $CC_BINARY_FOLDER
 ############### DOWNLOAD CC INSTALL FILES TO HOST ###################
-sudo wget -P $WORKING_FOLDER ftp://$USERNAME:$USERPWASSWORD@$CC_BINARY_PATH/cco-installer.jar
-sudo wget -P $WORKING_FOLDER ftp://$USERNAME:$USERPWASSWORD@$CC_BINARY_PATH/cco-response.xml
-sudo wget -P $WORKING_FOLDER ftp://$USERNAME:$USERPWASSWORD@$CC_BINARY_PATH/core_installer.bin
-sudo wget -P $WORKING_FOLDER ftp://$USERNAME:$USERPWASSWORD@$CC_BINARY_PATH/ccm-installer.jar
-sudo wget -P $WORKING_FOLDER ftp://$USERNAME:$USERPWASSWORD@$CC_BINARY_PATH/ccm-response.xml
-sudo wget -P $WORKING_FOLDER ftp://$USERNAME:$USERPWASSWORD@$CC_BINARY_PATH/conn_broker-response.xml
-sudo wget -P $WORKING_FOLDER ftp://$USERNAME:$USERPWASSWORD@$CC_BINARY_PATH/worker_installer.bin
-chmod +x $WORKING_FOLDER/*.bin
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/cco-installer.jar
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/cco-response.xml
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/core_installer.bin
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/ccm-installer.jar
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/ccm-response.xml
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/conn_broker-response.xml
+sudo wget -P $CC_BINARY_FOLDER ftp://$USERNAME:$USERPASSWORD@$CC_BINARY_URL/worker_installer.bin
+chmod +x $CC_BINARY_FOLDER/*.bin

@@ -11,19 +11,19 @@ fi
 export USERNAME=$1
 export USERPASSWORD=$2
 export CC_BINARY_PATH=$3
+export INSTALL_ROOT_FOLDER=/tmp
+export INSTALL_AUTOMATION_FOLDER=cc-install-automation
 export GIT_REPO_PROJECT=cloudcenter-automated-installation
 export GIT_REPO_URL=HybridCloudSuccessful/$GIT_REPO_PROJECT.git
-export INSTALL_EXECUTE_FOLDER=cc-install-automation
-export INSTALL_ROOT_FOLDER=/tmp
-
-#clean tmp
-sudo rm -rf $INSTALL_ROOT_FOLDER/*
 
 #tools
 sudo yum -y update
 sudo yum -y install git
 sudo yum -y install sshpass
 sudo yum -y install xz-libs
+
+#clean tmp
+sudo rm -rf $INSTALL_ROOT_FOLDER/*
 
 #clone repository
 git clone https://github.com/$GIT_REPO_URL /tmp/$GIT_REPO_PROJECT
@@ -34,23 +34,23 @@ source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/02_install-python.
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/03_install-pip.sh
 source $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/cc-host-install/04_install-ansible.sh
 
-cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER
 chmod -R +x *sh
 pwd
 
-cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/ccm-terraform
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER/ccm-terraform
 chmod -R +x *sh
 chmod -R +x terraform
 
-cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/cco-terraform
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER/cco-terraform
 chmod -R +x *sh
 chmod -R +x terraform
 
-cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/ccm-ansible
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER/ccm-ansible
 chmod -R +x *sh
 
-cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER/cco-ansible
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER/cco-ansible
 chmod -R +x *sh
 
-cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_EXECUTE_FOLDER
+cd $INSTALL_ROOT_FOLDER/$GIT_REPO_PROJECT/$INSTALL_AUTOMATION_FOLDER
 ./99_execute.sh

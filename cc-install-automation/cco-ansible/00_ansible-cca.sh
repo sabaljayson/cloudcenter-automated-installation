@@ -18,6 +18,5 @@ CC_BINARY_PATH=$3
 #$USERNAME $USERPWASSWORD $CC_BINARY_PATH
 
 ############### ANSIBLE ###################
-#ansible-playbook release.yml --extra-vars "hosts=vipers user=starbuck"
 ansible-playbook playbooks/vmware-cca.yml --extra-vars "user=$USERNAME password=$USERPWASSWORD cc-binary-path=$CC_BINARY_PATH"
 
