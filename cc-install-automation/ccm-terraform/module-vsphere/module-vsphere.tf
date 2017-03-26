@@ -41,7 +41,7 @@ variable "ccmon_volume_size" {default = 20}
 
 #CCM VM
 resource "vsphere_virtual_machine" "ccm" {
-  name = "${var.short_name}-manager"
+  name = "${var.short_name}-manager-${format("%02d", count.index+1)}"
   datacenter = "${var.datacenter}"
   cluster = "${var.cluster}"
   folder = "${var.folder}"
@@ -75,7 +75,7 @@ output "ccm" {
 
 #CCMON VM (Monitor)
 resource "vsphere_virtual_machine" "ccmon" {
-  name = "${var.short_name}-monitor"
+  name = "${var.short_name}-monitor-${format("%02d", count.index+1)}"
   datacenter = "${var.datacenter}"
   cluster = "${var.cluster}"
   folder = "${var.folder}"
