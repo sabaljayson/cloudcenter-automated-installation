@@ -14,29 +14,25 @@
     - name: Wait for server to restart
       local_action:
         module: wait_for
-          host=cc-monitor
+          host=cc-monitor-01
           port=22
           delay=1
           timeout=120
 
   tasks:
-  - name: Install Wget
-    raw: yum -y install wget
-  - name: Step 0a - download cc-host-install-start.sh
-    raw: wget http://straube.ch/cisco/00_cc-host-install-start.sh -P $HOME
-  - name: Step 0b - chmod +x 00_cc-host-install-start.sh
-    command: chmod +x $HOME/00_cc-host-install-start.sh
-  - name: Step 0c - exec 00_cc-host-install-start.sh
-    command: sh $HOME/00_cc-host-install-start.sh
-  - name: Step 1 - Update hosts file with hosts file from ansible server
+  - name: Step 1 git clone
+    raw: git clone https://github.com/HybridCloudAutomation/cloudcenter-automated-installation.git /tmp
+  - name: Step 2 - exec 00_prepare-host.sh
+    command: sh /tmp/cloudcenter-automated-installation/00_prepare-host.sh {{ user }} {{ password }} {{ cc-binary-url }}
+  - name: Step 3 - Update hosts file with hosts file from ansible server
     copy: src=/etc/hosts dest=/etc/hosts
-  - name: Step 3 - chmod +x installer for VMware CloudCenter Manager
+  - name: Step 4 - chmod +x installer for VMware CloudCenter Monitor
     raw: chmod +x /tmp/cc-binary/core_installer.bin
-  - name: Step 4 - Execute installer for VMware CloudCenter Monitor
+  - name: Step 5 - Execute installer for VMware CloudCenter Monitor
     command: sh /tmp/cc-binary/core_installer.bin centos7 vmware monitor
-  - name: Step 5 - Execute Java installer
+  - name: Step 6 - Execute Java installer
     command: java -jar /tmp/cc-binary/monitor-installer.jar /tmp/cc-binary/monitor-response.xml
-  - name: Step 8c - 01_ccmon-monitor.properties.py
+  - name: Step 7 - 01_ccmon-monitor.properties.py
     raw: python /tmp/cc-install-automation/cc-property-scripts/01_ccmon-monitor.properties.py '1' 'cc-manager'
   - name: restart in 60 sec
     raw: shutdown -r 1
