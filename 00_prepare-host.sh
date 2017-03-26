@@ -22,7 +22,7 @@ sudo yum -y install sshpass
 sudo yum -y install xz-libs
 
 #clean tmp
-sudo rm -rf $INSTALL_ROOT_FOLDER/*
+#sudo rm -rf $INSTALL_ROOT_FOLDER/*
 
 #git install
 sudo yum -y install git
