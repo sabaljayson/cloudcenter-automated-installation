@@ -8,16 +8,16 @@ if [ $# -ne 3 ]; then
  echo 'please provide login credentials of the cloudcenter artifact server'
  echo '1.[user name]'
  echo '2.[user password]'
- echo '3.[cc binary path]'
+ echo '3.[cc binary url]'
  exit 1
 fi
 
 USERNAME=$1
 USERPWASSWORD=$2
-CC_BINARY_PATH=$3
+CC_BINARY_URL=$3
 #$USERNAME $USERPWASSWORD $CC_BINARY_PATH
 
 ############### ANSIBLE ###################
-source 00_ansible-ccm.sh $USERNAME $USERPASSWORD $CC_BINARY
-source 01_ansible-ccmon.sh $USERNAME $USERPASSWORD $CC_BINARY
+source 00_ansible-ccm.sh $USERNAME $USERPASSWORD $CC_BINARY_URL
+source 01_ansible-ccmon.sh $USERNAME $USERPASSWORD $CC_BINARY_URL
 
