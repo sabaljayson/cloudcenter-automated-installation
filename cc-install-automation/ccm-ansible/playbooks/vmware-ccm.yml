@@ -1,9 +1,9 @@
 ---
 - name: ansible-vmware-install-ccm
-  hosts: cc-manager
-  user: '{{user}}'
-  password: '{{password}}'
-  cc_binary_url: '{{cc_binary_url}}'
+- hosts: cc-manager
+- user: '{{user}}'
+- password: '{{password}}'
+- cc_binary_url: '{{cc_binary_url}}'
   
   # This handler is rebooting the target host and waiting for it to come back online
   # Once the shutdown is initiated, the status cannot be verified which leads to the task state unavailabl
