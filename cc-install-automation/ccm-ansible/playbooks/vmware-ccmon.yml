@@ -1,7 +1,11 @@
 ---
 - name: ansible-vmware-install-cchm
   # Use host or group defined in /etc/ansible/hosts
-  hosts: cc-monitor
+  hosts: cc-monitor-01
+  vars:
+    user: "{{ USER }}"
+    password: "{{ PASSWORD }}"
+    cc_binary_url: "{{ CC_BINARY_URL }}"
 
   # This handler is rebooting the target host and waiting for it to come back online
   # Once the shutdown is initiated, the status cannot be verified which leads to the task state unavailabl
@@ -23,7 +27,7 @@
   - name: Step 1 git clone
     raw: git clone https://github.com/HybridCloudAutomation/cloudcenter-automated-installation.git /tmp
   - name: Step 2 - exec 00_prepare-host.sh
-    command: sh /tmp/cloudcenter-automated-installation/00_prepare-host.sh {{ user }} {{ password }} {{ cc_binary_url }}
+    command: sh /tmp/cloudcenter-automated-installation/00_prepare-host.sh "{{ user }}" "{{ password }}" "{{ cc_binary_url }}"
   - name: Step 3 - Update hosts file with hosts file from ansible server
     copy: src=/etc/hosts dest=/etc/hosts
   - name: Step 4 - chmod +x installer for VMware CloudCenter Monitor
@@ -33,6 +37,6 @@
   - name: Step 6 - Execute Java installer
     command: java -jar /tmp/cc-binary/monitor-installer.jar /tmp/cc-binary/monitor-response.xml
   - name: Step 7 - 01_ccmon-monitor.properties.py
-    raw: python /tmp/cc-install-automation/cc-property-scripts/01_ccmon-monitor.properties.py '1' 'cc-manager'
+    raw: python /tmp/cc-install-automation/cc-property-scripts/01_ccmon-monitor.properties.py '1' 'cc-manager-01'
   - name: restart in 60 sec
     raw: shutdown -r 1
