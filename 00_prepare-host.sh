@@ -20,12 +20,11 @@ export GIT_REPO_URL=HybridCloudSuccessful/$GIT_REPO_PROJECT.git
 sudo yum -y update
 sudo yum -y install sshpass
 sudo yum -y install xz-libs
-
-#clean tmp
-#sudo rm -rf $INSTALL_ROOT_FOLDER/*
-
-#git install
 sudo yum -y install git
+sudo yum -y install wget
+
+#clean tmp for testing
+#sudo rm -rf $INSTALL_ROOT_FOLDER/*
 
 #github project clone
 git clone https://github.com/$GIT_REPO_URL /tmp/$GIT_REPO_PROJECT
