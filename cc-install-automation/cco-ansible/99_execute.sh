@@ -13,9 +13,9 @@ if [ $# -ne 3 ]; then
 fi
 
 USERNAME=$1
-USERPWASSWORD=$2
+USERPASSWORD=$2
 CC_BINARY_URL=$3
 
 ############### ANSIBLE ###################
-source 00_ansible-cca.sh $USERNAME $USERPWASSWORD $CC_BINARY_URL
-source 01_ansible-cco.sh $USERNAME $USERPWASSWORD $CC_BINARY_URL
+source 00_ansible-cca.sh $USERNAME $USERPASSWORD $CC_BINARY_URL
+source 01_ansible-cco.sh $USERNAME $USERPASSWORD $CC_BINARY_URL

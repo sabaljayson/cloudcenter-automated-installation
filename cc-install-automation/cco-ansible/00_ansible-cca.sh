@@ -13,10 +13,10 @@ if [ $# -ne 3 ]; then
 fi
 
 USERNAME=$1
-USERPWASSWORD=$2
+USERPASSWORD=$2
 CC_BINARY_URL=$3
-#$USERNAME $USERPWASSWORD $CC_BINARY_URL
+#$USERNAME $USERPASSWORD $CC_BINARY_URL
 
 ############### ANSIBLE ###################
-ansible-playbook playbooks/vmware-cca.yml --extra-vars "user=$USERNAME password=$USERPWASSWORD cc_binary_url=$CC_BINARY_URL"
+ansible-playbook playbooks/vmware-cca.yml --extra-vars "user=$USERNAME password=$USERPASSWORD cc_binary_url=$CC_BINARY_URL"
 
