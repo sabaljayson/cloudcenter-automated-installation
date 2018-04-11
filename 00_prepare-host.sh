@@ -2,15 +2,15 @@
 
 if [ $# -ne 3 ]; then
  echo 'please provide login credentials of the cloudcenter artifact server'
- echo '1.[admin]'
+ echo '1.'
  echo '2.[admin]'
  echo '3.[cloudnexus]'
  exit 1
 fi
 
-export USERNAME=$1
-export USERPASSWORD=$2
-export CC_BINARY_URL=$3
+export USERNAME=admin
+export USERPASSWORD=admin
+export CC_BINARY_URL=cloudnexus
 export INSTALL_ROOT_FOLDER=/tmp
 export INSTALL_AUTOMATION_FOLDER=cc-install-automation
 export GIT_REPO_PROJECT=cloudcenter-automated-installation
