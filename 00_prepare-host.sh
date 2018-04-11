@@ -2,9 +2,9 @@
 
 if [ $# -ne 3 ]; then
  echo 'please provide login credentials of the cloudcenter artifact server'
- echo '1.[user name]'
- echo '2.[user password]'
- echo '3.[cc binary url]'
+ echo '1.[admin]'
+ echo '2.[admin]'
+ echo '3.[cloudnexus]'
  exit 1
 fi
 
